@@ -1,0 +1,43 @@
+﻿<Window x:Class="RSA_App.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RSA_App"
+        xmlns:viewModel ="clr-namespace:RSA_App.ViewModel"
+        mc:Ignorable="d"
+        Title="RSA" Height="500" Width="800">
+
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="349*"/>
+            <ColumnDefinition Width="101*"/>
+            <ColumnDefinition Width="350*"/>
+
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Label Content="Публичный ключ" Margin="50,21,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="106"/>
+            <TextBox Margin="50,50,50,0" TextWrapping="Wrap" Text="TextBox" Height="85" VerticalAlignment="Top"/>
+            <Label Content="Сообщение" Margin="50,146,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="106"/>
+            <TextBox Margin="50,175,50,0" TextWrapping="Wrap" Text="TextBox" Height="85" VerticalAlignment="Top"/>
+            <Button Margin="101,270,101,0" Height="40" VerticalAlignment="Top" Content="Зашифровать" />
+            <TextBox Margin="50,321,50,0" TextWrapping="Wrap" Text="TextBox" Height="85" VerticalAlignment="Top"/>
+        </Grid>
+
+        <Button Grid.Column="1" Content="Создать ключ" Margin="10,68,10,0" FontStyle="Normal" FontSize="10" Height="52" VerticalAlignment="Top" />
+
+        <Grid Grid.Column="2">
+            <Label Content="Приватныйй ключ" Margin="50,21,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="115"/>
+            <TextBox  Margin="50,50,50,0" TextWrapping="Wrap" Text="TextBox" Height="85" VerticalAlignment="Top"/>
+            <Label Content="Публичный ключ" Margin="50,146,0,0" HorizontalAlignment="Left" Width="106" Height="29" VerticalAlignment="Top"/>
+            <TextBox TextWrapping="Wrap" Text="TextBox" Height="85" VerticalAlignment="Top" Margin="50,175,50,0"/>
+            <Button Margin="101,270,102,0" Height="40" VerticalAlignment="Top" Content="Дешифровать" />
+            <TextBox Margin="50,321,50,0" TextWrapping="Wrap" Text="TextBox" Height="85" VerticalAlignment="Top"/>
+        </Grid>
+    </Grid>
+</Window>
