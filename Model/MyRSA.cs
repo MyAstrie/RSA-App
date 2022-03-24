@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace RSA_App.Model
 {
-    public class RsaCrypt
+    public class MyRSA
     {
         public int KeyValue { get; set; }
 

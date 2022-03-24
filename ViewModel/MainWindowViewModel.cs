@@ -10,7 +10,7 @@ namespace RSA_App.ViewModel
     public class MainWindowViewModel : BindableBase
     {
         // Class instance declaration
-        private readonly MyRSA _myRSA = new ();
+        private readonly MyRSA _MyRSA = new ();
 
         #region PublicKey
 
@@ -103,7 +103,7 @@ namespace RSA_App.ViewModel
         public ICommand EncryptionCommand => new DelegateCommand(() =>
         {
             if (!string.IsNullOrEmpty(PlainText) && !string.IsNullOrEmpty(PublicKey))
-                CryptedMessage = _myRSA.Encrypt(PlainText, PublicKey);
+                CryptedMessage = _MyRSA.Encrypt(PlainText, PublicKey);
             else
                 MessageBox.Show("Поле публичного ключа или текста не могут быть пустыми");
         });
@@ -116,7 +116,7 @@ namespace RSA_App.ViewModel
         {
 
             if (!string.IsNullOrEmpty(CipherText) && !string.IsNullOrEmpty(PrivateKey))
-                DecryptedMessage = _myRSA.Decrypt(CipherText, PrivateKey);
+                DecryptedMessage = _MyRSA.Decrypt(CipherText, PrivateKey);
             else
                 MessageBox.Show("Поле приватного ключа или текста не могут быть пустыми");
         });
@@ -127,13 +127,13 @@ namespace RSA_App.ViewModel
 
         public ICommand GenerateKeyCommand => new DelegateCommand(() =>
         {
-            _myRSA.KeyValue = SelectedKeyLength;
+            _MyRSA.KeyValue = SelectedKeyLength;
 
-            if (_myRSA.KeyValue is 0)
+            if (_MyRSA.KeyValue is 0)
                 MessageBox.Show("Выберите длину ключа");
             else
             {
-                var keyPair = _myRSA.GenerateKeyPair();
+                var keyPair = _MyRSA.GenerateKeyPair();
                 PrivateKey = keyPair.Item1;
                 PublicKey = keyPair.Item2;
             }
