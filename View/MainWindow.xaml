@@ -3,13 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RSA_App"
-        xmlns:viewModel ="clr-namespace:RSA_App.ViewModel"
-        mc:Ignorable="d"
-        Title="RSA" Height="500" Width="800">
+        xmlns:local="clr-namespace:RSA_App.View"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:prsm="http://www.codeplex.com/prism"  
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:viewModel="clr-namespace:RSA_App.ViewModel"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d"     TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="RSA" Height="500" Width="900">
 
     <Window.DataContext>
-        <viewModel:MainWindowViewModel />
+        <viewModel:MainWindowViewModel/>
     </Window.DataContext>
 
     <Grid>
@@ -17,27 +24,30 @@
             <ColumnDefinition Width="349*"/>
             <ColumnDefinition Width="101*"/>
             <ColumnDefinition Width="350*"/>
-
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
             <Label Content="Публичный ключ" Margin="50,21,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="106"/>
-            <TextBox Margin="50,50,50,0" TextWrapping="Wrap" Text="TextBox" Height="85" VerticalAlignment="Top"/>
+            <TextBox Style="{DynamicResource MaterialDesignTitleTextBlock}" Margin="50,50,50,0" TextWrapping="Wrap" Text="{Binding PublicKey}" Height="85" VerticalAlignment="Top"/>
             <Label Content="Сообщение" Margin="50,146,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="106"/>
-            <TextBox Margin="50,175,50,0" TextWrapping="Wrap" Text="TextBox" Height="85" VerticalAlignment="Top"/>
-            <Button Margin="101,270,101,0" Height="40" VerticalAlignment="Top" Content="Зашифровать" />
-            <TextBox Margin="50,321,50,0" TextWrapping="Wrap" Text="TextBox" Height="85" VerticalAlignment="Top"/>
+            <TextBox Style="{DynamicResource MaterialDesignTitleTextBlock}" Margin="50,175,50,0" TextWrapping="Wrap" Text="{Binding PlainText}" Height="85" VerticalAlignment="Top"/>
+            <Button Command="{Binding EncryptionCommand}" Margin="101,270,101,0" Content="Зашифровать" FontSize="12" FontWeight="Bold" Cursor="Hand" Height="43" VerticalAlignment="Top" />
+            <TextBox IsReadOnly = "True" Style="{DynamicResource MaterialDesignTitleTextBlock}" Margin="50,321,50,78" TextWrapping="Wrap" Background="Transparent" BorderBrush="Transparent" Text="{Binding CryptedMessage}"/>
         </Grid>
 
-        <Button Grid.Column="1" Content="Создать ключ" Margin="10,68,10,0" FontStyle="Normal" FontSize="10" Height="52" VerticalAlignment="Top" />
+        <Grid Grid.Column="1">
+            <Button Command="{Binding GenerateKeyCommand}" Content="Создать ключ" Margin="10,65,10,0" FontStyle="Normal" FontSize="9" Height="52" VerticalAlignment="Top" FontWeight="Bold" />
+            <Label Content="Размер &#xA;Ключа :" Margin="10,140,10,0" Height="37" VerticalAlignment="Top" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Top"/>
+            <ComboBox SelectedItem="{Binding SelectedKeyLength}" ItemsSource="{Binding KeysLength}" Margin="10,182,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
+        </Grid>
 
         <Grid Grid.Column="2">
-            <Label Content="Приватныйй ключ" Margin="50,21,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="115"/>
-            <TextBox  Margin="50,50,50,0" TextWrapping="Wrap" Text="TextBox" Height="85" VerticalAlignment="Top"/>
-            <Label Content="Публичный ключ" Margin="50,146,0,0" HorizontalAlignment="Left" Width="106" Height="29" VerticalAlignment="Top"/>
-            <TextBox TextWrapping="Wrap" Text="TextBox" Height="85" VerticalAlignment="Top" Margin="50,175,50,0"/>
-            <Button Margin="101,270,102,0" Height="40" VerticalAlignment="Top" Content="Дешифровать" />
-            <TextBox Margin="50,321,50,0" TextWrapping="Wrap" Text="TextBox" Height="85" VerticalAlignment="Top"/>
+            <Label Content="Приватный ключ" Margin="50,21,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="115"/>
+            <TextBox Style="{DynamicResource MaterialDesignTitleTextBlock}" Margin="50,50,50,0" TextWrapping="Wrap" Text="{Binding PrivateKey}" Height="85" VerticalAlignment="Top"/>
+            <Label Content="Зашифрованный Ключ" Margin="50,146,0,0" HorizontalAlignment="Left" Width="146" Height="29" VerticalAlignment="Top"/>
+            <TextBox Style="{DynamicResource MaterialDesignTitleTextBlock}" Text="{Binding CipherText}" Height="85" VerticalAlignment="Top" Margin="50,175,50,0" TextWrapping="Wrap"/>
+            <Button Command="{Binding DecryptionCommand}" Margin="101,270,102,0" Height="40" VerticalAlignment="Top" Content="Дешифровать" FontSize="12" FontWeight="Bold" />
+            <TextBox IsReadOnly = "True" Style="{DynamicResource MaterialDesignTitleTextBlock}" Margin="50,321,50,78" TextWrapping="Wrap" Text="{Binding DecryptedMessage}" BorderBrush="Transparent" Background="Transparent"/>
         </Grid>
     </Grid>
 </Window>

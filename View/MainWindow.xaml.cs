@@ -1,16 +1,18 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using Prism.Regions;
 
 namespace RSA_App.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+
+    [DesignTimeVisible(false)]
+    public partial class MainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
         }
-
     }
 }
